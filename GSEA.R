@@ -153,7 +153,7 @@ ES_df_for_NES <- data.frame(row.names = names(S_gene_set_list))
 
 n_perm <- 3 # Number of permutations
 for(perm in 1:n_perm){              #First Enrichment Score calculated is bserved ES for the original expressions data set.Printing to output file GS_out 
-  if(perm == 1){
+  if(perm == 1000){
     L_runningSum <- Cal_RunningSum(S_gene_set_list,Sorted_L) # Calling L_RunningSum for calculating runningSum for each permutation of expression set
     Observed_ES <- Cal_EnrichScore(L_runningSum)#Keeping a vector for Observed ES for later comparisons and calculations
     GS_out$Enrichment_Score <- signif(Observed_ES,4)

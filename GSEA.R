@@ -151,9 +151,9 @@ for(i in 1:length(S_gene_set_list)){
 #Creating a dataframe with Gene set names as Rownames to keep all ES(perm)
 ES_df_for_NES <- data.frame(row.names = names(S_gene_set_list)) 
 
-n_perm <- 3 # Number of permutations
+n_perm <- 50 # Number of permutations
 for(perm in 1:n_perm){              #First Enrichment Score calculated is bserved ES for the original expressions data set.Printing to output file GS_out 
-  if(perm == 1000){
+  if(perm == 1){
     L_runningSum <- Cal_RunningSum(S_gene_set_list,Sorted_L) # Calling L_RunningSum for calculating runningSum for each permutation of expression set
     Observed_ES <- Cal_EnrichScore(L_runningSum)#Keeping a vector for Observed ES for later comparisons and calculations
     GS_out$Enrichment_Score <- signif(Observed_ES,4)
@@ -224,15 +224,15 @@ GS_out <- GS_out[order(-GS_out$NES), ,] #arrange by descending order of NES
 View(GS_out)
 
 
-#Printing the top 20 to the output - Filename: 'GSEA_ES_TABLE.pdf'#
-pdf('GSEA_ES_TABLE.pdf')
-GS_top_20 <- head(GS_out, n=20) 
-GS_top_20$Gene_Set_Names <- row.names(GS_top_20)
-row.names(GS_top_20) <- NULL 
-GS_top_20 <- GS_top_20[c(4,1,2,3)]
-grid.table(GS_top_20)
+#Printing the top 30 to the output - Filename: 'GSEA_ES_TABLE.pdf'#
+pdf('GSEA_ES_TABLE.pdf', height = 11, width = 8)
+GS_top_30 <- head(GS_out, n=30) 
+GS_top_30$Gene_Set_Names <- row.names(GS_top_30)
+row.names(GS_top_30) <- NULL 
+GS_top_30 <- GS_top_30[c(4,1,2,3)]
+grid.table(GS_top_30)
 dev.off()
 
-View(GS_top_20)
+View(GS_top_30)
 
 
